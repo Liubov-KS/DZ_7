@@ -5,7 +5,7 @@ m = 3, n = 4.
 1 -3,3 8 -9,9
 8 7,8 -7,1 9
 */
-/* Console.WriteLine("Задайте количество строк двумерного массива:"); // m
+Console.WriteLine("Задайте количество строк двумерного массива:"); // m
 int m = Convert.ToInt32(Console.ReadLine());
 
 Console.WriteLine("Задайте количество столбцов двумерного массива:"); // n
@@ -43,7 +43,7 @@ FillArray(twoDimArray);
 Console.WriteLine();
 
 PrintArray(twoDimArray);
-*/
+
 
 
 //Задача 50.
@@ -99,3 +99,52 @@ for (int i = 0; i < array.GetLength(0); i++)
 8 4 2 4
 Среднее арифметическое каждого столбца: 4,6; 5,6; 3,6; 3. 
 */
+  /*
+            int[,] mas = new int[3,4] {{1,4,7,2},{5,9,2,3},{8,4,2,4}};
+ 
+            for (int i = 0; i < 3; i++) 
+            {
+                int srAr = 0;
+                int ColChetn = 0;
+                for (int j = 0; j < 4; j++)
+                {
+                    srAr += mas[i, j];
+                    ColChetn += (mas[i, j] % 2 == 0) ? 1 : 0;
+                }
+                Console.WriteLine($"Cреднее арифметическое элементов столбца {i + 1} = {(float)srAr/3}");
+                Console.WriteLine($"Количество четных элементов столбца {i + 1} = {ColChetn}");
+            }
+ */       
+
+
+
+System.Console.WriteLine("Введите количество строк массива: ");
+int rows = int.Parse(Console.ReadLine());
+System.Console.WriteLine("Введите количество столбцов массива: ");
+int columns = int.Parse(Console.ReadLine());
+
+int array = GetArray(rows, columns, 0, 10);
+PrintArray(array);
+
+double[] averageColumns = GetResultArray(array);
+Console.WriteLine($"Cреднее арифметическое каждого столбца = {String.Join("; ", averageColumns)}");
+
+char input1 = Console.ReadKey().KeyChar;
+
+double[] GetResultArray(int[,] array)
+{
+    double[] result = new double[array.GetLength(1)];
+    for (int i = 0; i < array.GetLength(1); i++)
+    {
+        double sum = 0;
+        for (int j = 0; j < array.GetLength(0); j++)
+        {
+            sum+= array[j, i];
+        }
+        sum = Math.Round(sum / array.GetLength(0), 2);
+        result[i] = Math.Round(sum / array.GetLength(0), 2);
+        Console.WriteLine($"Среднее арифметическое {sum}");
+    }
+    return result;
+}
+
